@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<title>Generation of ChalupaX cardback pattern</title>
+		<script type="text/javascript" src="https://unpkg.com/fabric@4.6.0/dist/fabric.min.js"></script>
+				<script type="text/javascript">
+						window.onload = (event) => {
+						var canvas = new fabric.Canvas("canva");
+					/*
+						for (i = 0; i < 5; i++)
+						{
+						var rect = new fabric.Rect({
+								left: 100 + (i * 30),
+								top: 100,
+								fill: 'red',
+								width: 20,
+								height: 20
+						});
+							canvas.add(rect);
+						}
+					   */
+						for (i = 177; i > 0; i -= 20)
+						{
+							var elli = new fabric.Ellipse({
+								left: i,
+								top: 182,
+								fill: 'yellow',
+								rx: 11,
+								ry: 7
+							});
+							canvas.add(elli);
+						}
+						for (j = 172; j > 0; j -= 20)
+						{
+							var elli = new fabric.Ellipse({
+								left: 182,
+								top: j,
+								fill: 'yellow',
+								rx: 7,
+								ry: 11
+							});
+							canvas.add(elli);
+						}
+
+					for (j = 182, i = 182; i > 0 && j > 0; i -= 5, j -= 5)
+					{
+						var elli  = new fabric.Ellipse({
+							left: i,
+							top: j,
+							fill: 'yellow',
+							rx: 3,
+							ry: 3
+						});
+						canvas.add(elli);
+					}
+						canvas.setBackgroundColor('#000');
+						canvas.renderAll.bind(canvas)
+						};
+				</script>
+	</head>
+	<body>
+			<canvas id="canva" width="200" height="200">Browser canvas support necessary</canvas>
+	</body>
+</html>

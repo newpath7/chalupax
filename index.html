@@ -1,0 +1,71 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8" />
+<title>Chalupax</title>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+		crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.min.js"></script>  -->
+<script src="//cdn.jsdelivr.net/npm/phaser@3.53.1/dist/phaser.min.js"></script> 
+<!--<script src="//cdn.jsdelivr.net/npm/phaser@3.50/dist/phaser.min.js"></script> -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+<script src="lib/browser-matrix.min.js"></script>
+<style type="text/css">
+  table#score {
+      font-size: 8pt;
+      width: 15em;
+  }
+  span#glt {
+      font-size: 9pt;
+      font-weight: 900;
+  }
+  div#scoreboard { width: 18em;}
+</style>
+</head>
+<body>
+<div id="result"></div>
+<div class="container">
+ <div class="row">
+  <div class="col-3">
+   <h4>Chalupax Matrix game room information</h4>
+	<label for="username" class="form-label">Username:</label>
+	<input type="text" id="username" 
+		class="form-control-plaintext" 
+		placeholder="@LOTERIA:matrix.org" value="" />
+	<label for="password">Password:</label>
+	<input type="password" class="form-control" id="password" />
+	<label for="joinroom">Room id to join:</label>
+	<input type="text" id="targetroom" 
+		class="form-control-paintext" 
+		placeholder="!SomeLongString:matrix.org" value="" /><br />
+	<br />
+	<center><button id="joingame" type="submit" 
+		class="btn btn-primary">Login</button></center>
+	<br />
+	<a href="https://phaser.io" target="_blank"><img src="images/Phaser.png"></a><br /><br />
+	<a href="https://matrix.org" target="_blank"><img src="images/mmp.svg"></a><br /><br />
+	<a href="https://getbootstrap.com" target="_blank"><img src="images/bootstrap-solid.svg" width="25" height="25" style="margin-right: 3em;" /></a><a href="https://jquery.com" target="_blank"><img src="images/jQuery-Logo.png" height="35" width="137" /></a><br /><br />
+  </div>
+  <div class="col-9">
+   <div id="gamearea"></div>
+   <div class="row">
+    <div class="col-8" id="status" style="height: 5em; overflow: hidden"></div>
+    <div class="col-1" style="height: 5em;">
+	    <div id="buenabtn" style="visibility: hidden" class="btn btn-warning">Buena</div><br />
+	    <div id="pausebtn" style="visibility: hidden" class="btn btn-info">Pause</div>
+	    <div id="scoreboard"></div>
+    </div>
+     <div id="minichat"></div>
+    </div>
+  </div>
+ </div>
+</div>
+<script src="lib/Winscene.js"></script>
+<script type="module" src="lib/loteria.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/gh/SilverTree7622/Phaser3_GUI_Inspector@latest/dist/PGInspector.js"></script> -->
+</body>
+</html>

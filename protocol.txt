@@ -1,0 +1,76 @@
+WG = 15 seconds		// WaitGame time
+AC = WG / 3		// time interval between advertisements
+AT = WG * 2		// total time for advertising
+
+Game join/generate
+==================
+After joining room wait WG for any game announcements
+If no game advertisements are found within that time, announce "hosting" a game, and resend announcement every WG / 3, that for 2 WG times
+Player1: Listens for game announcements for WG seconds
+
+If no announcement seen
+------------------------
+Player1.Msg("!! HS X") // hosting game
+	Player3.Msg("!! HST Y")
+Player2.Msg("!! JN X") // join game
+	wait (10 seconds?)
+Player1.Msg("!! SR X Player1 Player2") // game X started with player 1, player2
+
+If announcement seen
+--------------------
+Player1.Msg("!! JN Y")	// join game X (or whatever game was being announced)
+Player2.Msg("!! JN Y")
+Player3.Msg("!! SR Y Player3 Player2 Player1")
+
+After AT, if at least one player joined, a message is sent confirming or showing all players that have joined the game
+
+
+Selection of tablas
+==================
+Immediately after, tablas are selected. Tabla goes to player who first sends message selecting that tabla. Confirmation of selection is based on order in which tabla selection arrives in room, with the earliest selection going to the player who selected it.
+
+
+Player2.Msg("!! SL J") // Selected tabla J
+Player1.Msg("!! SL K")
+
+
+SGEN
+====
+After tablas has been selected for all players, from each player host should make a hash of all client hashes and use this to randomize cards and publish resulting set
+
+Shuffling
+---------
+(Player1 is host)
+Player2.Msg("!! GR b")
+Player3.Msg("!! GR c")
+Player1.seed = md5sum(a + b + c);
+Player1.generate card sequence -> rand({1 .. 54}, seed);
+Player1.Msg("!! CS card_sequence")	// publishing of shuffled cards (space separate list of numbers 1 to 54
+
+Cantando
+--------
+After card sequence has been published, game outcome is determined, but this does not need to be known by players. Instead, cards are drawn from the deck one at a time, at a specific time-interval, and player must wait for a card to be picked in this way before being able to set the marker on the tabla and/or to claim a "buena." Whoever is first to validly claim buena before all cards are drawn wins. If no one claims buena, then everyone was "sleeping."
+
+All clients (and host) loop (while listening for messages) as...
+While (available cards > 0)
+	Shift off number from card sequence and add to array shifted off numbers
+	Display that card (with animation/audio/etc.)
+	Wait 10 seconds
+During this loop listen for input event
+	- Marker placed
+		* Has this number played? (it's in array of shifted of numbers)
+	- Buena button pressed
+		* Check if buena can be claimed
+		* Send Buena message if so
+		* "Congratulate" player for buena
+If loop terminates
+	* Wait 10 seconds
+	* Alert No More Cards message 
+
+--Messages that can be seen when state in cantando
+Player1.Msg("!! EN")	// END player ends game
+	- Sent when player disconnects
+OR
+PlayerX.Msg("!! BU")	// BUENA someone claimed to have won
+	- Sent when player claims buena (clicking buena button)
+	- Check whether player claiming buena can actually claim it, and inform that someone has won if so (ignore otherwise)
