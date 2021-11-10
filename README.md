@@ -5,7 +5,7 @@ Chalupax is a way to play [chalupa](https://en.wikipedia.org/wiki/Loter%C3%ADa) 
 You can
 * Clone the repository
 	* Run any HTTP server in the top-level repository directory
-* Or, click [here](https://newpath7.github.io/chalupax/)
+* ~~Or, click [here](https://newpath7.github.io/chalupax/)~~
 
 Then you will need to
 * Agree on which matrix room all players will use
