@@ -1,0 +1,11 @@
+*~
+#*#
+*.bak
+trash
+myroom.txt
+node_modules
+*.xcf
+yarn.*
+package.json
+package-lock.json
+yarn-*

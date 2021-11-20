@@ -4,14 +4,22 @@ Chalupax is a way to play [chalupa](https://en.wikipedia.org/wiki/Loter%C3%ADa) 
 ## Usage
 You can
 * Clone the repository
-	* Run any HTTP server in the top-level repository directory
-* ~~Or, click [here](https://newpath7.github.io/chalupax/)~~
+	* In top-level directory run
+	* Using yarn 1.22.17 (with npm 8.1.0) and node v16.13.0:
+		* yarn add http-server matrix-js-sdk 
+	* npm install websocket
+	* node hserv.mjs
+	* Wait for it to say "Server started"
+* Or, if your browser CORS policy allows, click [here](https://newpath7.github.io/chalupax/)
 
 Then you will need to
 * Agree on which matrix room all players will use
 * Enter username, password and matrix room and click "Login"
-* Everyone should try to login at the same time
-* Whoever logs in first will be the one to host the game
+	* The user must already be in the room that will be used
+* If using local node server, make sure the "use local server" checkbox is checked
+* Players (up to 10) agree on a time to start the game
+* When "Login" button is clicked, one will immediately wait for available game advertisements for about 10 seconds, and if no advertisements are seen, one will start advertising a game
+
 
 ## Contributions
 [Jungle Moon](https://github.com/newpath7) is the creator and maintainer of this repository.
