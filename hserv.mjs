@@ -9,9 +9,10 @@ var server = httpServer.createServer({
 	root: "."
 });
 var rid = "";
+var connection;
 
 server.listen(port, host, function () {
-	console.log("Server started");
+	console.log("Server started, on port " + port);
 });
 var WebSocketServer = WebSocketLib.server;
 var wserver = http.createServer();
@@ -19,8 +20,8 @@ wserver.listen(8081);
 var wsServer = new WebSocketServer({httpServer: wserver});
 const client = sdk.createClient("https://matrix.org");
 wsServer.on('request', function(request) {
-	var connection = request.accept(null, request.origin);
-	connection.on('message', function(message) {
+	connection = request.accept(null, request.origin);
+	connection.on('message', async function(message) {
 		let msg = JSON.parse(message.utf8Data);
 
 		if (msg.cmd == "joingame") {
@@ -33,12 +34,18 @@ wsServer.on('request', function(request) {
 					}).then((err, response) => {
 							console.log("Connected to Matrix server...");
 							client.startClient();
+								client.on("Room.localEchoUpdated",
+		                        	function(event, room, oEid, OStat) {
+										//	console.log("Room.localEchoUpdated fired");
+											connection.sendUTF(JSON.stringify({cmd: "clr", data: {}}));
+									});
+
 							client.once('sync', function(state, prevState, res) {
 									console.log("Sync state: " + state);
 
 									if (state == "PREPARED") {
 											console.log("Adding room.timeline");
-											client.on("Room.timeline", function(event, room, toStartOfTimeline) {
+								client.on("Room.timeline", function(event, room, toStartOfTimeline) {
 
 													if (event.getType() != "m.room.message") {
 														return;
@@ -56,11 +63,12 @@ wsServer.on('request', function(request) {
 					});
 				}
 		} else if (msg.cmd == "send") {
-			client.sendMessage(msg.data.rid, msg.data.data).then(function () {
-		           console.log("sndMsg: msg sent");
-		       }, function (err) {
-					console.error("sndMsg: err %s", JSON.stringify(err));
-				});
+				client.sendMessage(msg.data.rid, msg.data.data).then(function () {
+		        //   console.log("sndMsg: msg sending...");
+		       	}, function (err) {
+						console.error("sndMsg: err %s", JSON.stringify(err));
+					});
 		}
 	});
 });
+//console.log("Event: " + event.getType() + " with data: " + JSON.stringify(event.getContent()));

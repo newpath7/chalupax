@@ -10,15 +10,16 @@ You can
 	* npm install websocket
 	* node hserv.mjs
 	* Wait for it to say "Server started"
+	* Access from browser on port 8080, for example http://127.0.0.1:8080/ or http://localhost:8080/
 * Or, if your browser CORS policy allows, click [here](https://newpath7.github.io/chalupax/)
 
-Then you will need to
-* Agree on which matrix room all players will use
+The following is needed after browser has loaded the page and is ready
+* Agree on which matrix room all players (up to 10) will use
 * Enter username, password and matrix room and click "Login"
 	* The user must already be in the room that will be used
-* If using local node server, make sure the "use local server" checkbox is checked
-* Players (up to 10) agree on a time to start the game
-* When "Login" button is clicked, one will immediately wait for available game advertisements for about 10 seconds, and if no advertisements are seen, one will start advertising a game
+* If using local node server, check "use local server"
+* Players agree on a time to start the game
+* When "Login" button is clicked, one will immediately wait for available game advertisements for about 10 seconds, and if no advertisements are seen, one will start advertising/hosting a game
 
 
 ## Contributions
