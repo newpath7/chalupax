@@ -11,7 +11,9 @@ You can
 	* node hserv.mjs
 	* Wait for it to say "Server started"
 	* Access from browser on port 8080, for example http://127.0.0.1:8080/ or http://localhost:8080/
-* Or, if your browser CORS policy allows, click [here](https://newpath7.github.io/chalupax/)
+* Or
+	* Go [here](https://newpath7.github.io.chalupax/) and click "Single-user mode" and then "Start" to get an idea of the game-play
+	* If your browser CORS policy allows, and with the "Single-user mode" and the "Use local server" checkboxes unchecked, it may be possible to login to the matrix.org server to play
 
 The following is needed after browser has loaded the page and is ready
 * Agree on which matrix room all players (up to 10) will use
